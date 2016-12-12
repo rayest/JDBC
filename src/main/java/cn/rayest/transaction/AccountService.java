@@ -10,10 +10,10 @@ import java.sql.SQLException;
  * Created by Rayest on 2016/6/27 0027.
  */
 public class AccountService {
-    private static DatabaseService databaseService = new DatabaseService();
+    DatabaseService databaseService = new DatabaseService();
 
     // 转出
-    private static void outAccount(Connection connection, String accountName, int account) throws SQLException {
+    public void outAccount(Connection connection, String accountName, int account) throws SQLException {
         String sql = "update t_account set accountBalance=accountBalance-? where accountName=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, account);
@@ -21,7 +21,7 @@ public class AccountService {
         preparedStatement.executeUpdate();
     }
 
-    private static void inAccount(Connection connection, String accountName, int account) throws SQLException {
+    public void inAccount(Connection connection, String accountName, int account) throws SQLException {
         String sql = "update t_account set accountBalance=accountBalance+? where accountName=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, account);
@@ -29,7 +29,7 @@ public class AccountService {
         preparedStatement.executeUpdate();
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         Connection connection = null;
         // Savepoint savepoint = null;
         // 声明回滚点
