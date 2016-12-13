@@ -14,7 +14,7 @@ public class AccountService {
 
     // 转出
     public void outAccount(Connection connection, String accountName, int account) throws SQLException {
-        String sql = "update t_account set accountBalance=accountBalance-? where accountName=?";
+        String sql = "update t_account set accountBalance = accountBalance - ? where accountName = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, account);
         preparedStatement.setString(2, accountName);
@@ -22,7 +22,7 @@ public class AccountService {
     }
 
     public void inAccount(Connection connection, String accountName, int account) throws SQLException {
-        String sql = "update t_account set accountBalance=accountBalance+? where accountName=?";
+        String sql = "update t_account set accountBalance = accountBalance + ? where accountName = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, account);
         preparedStatement.setString(2, accountName);
