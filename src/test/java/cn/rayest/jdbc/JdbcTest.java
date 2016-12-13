@@ -43,5 +43,4 @@ public class JdbcTest {
         assertEquals(1, result);
     }
 
-
 }
