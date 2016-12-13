@@ -12,27 +12,24 @@ import java.util.List;
  * Created by Rayest on 2016/12/12 0012.
  */
 public class Jdbc {
-    private static DatabaseService databaseService = new DatabaseService();
+    private DatabaseService databaseService = new DatabaseService();
 
     public int create(Student student) throws Exception {
         Connection connection = databaseService.getConnection();
-        String sql = "insert into t_student values(?, ?, ?)";
+        String sql = "INSERT INTO t_student (name, age) VALUES (?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, student.getId());
-        preparedStatement.setString(2, student.getName());
-        preparedStatement.setInt(3, student.getAge());
+         preparedStatement.setString(1, student.getName());
+        preparedStatement.setInt(2, student.getAge());
         int result = preparedStatement.executeUpdate();
-        databaseService.close(preparedStatement, connection);
         return result;
     }
 
-    public int delete(int id) throws Exception {
+    public int deleteById(int id) throws Exception {
         Connection connection = databaseService.getConnection();
         String sql = "DELETE FROM t_student WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         int result = preparedStatement.executeUpdate();
-        databaseService.close(preparedStatement, connection);
         return result;
     }
 
@@ -60,8 +57,6 @@ public class Jdbc {
         preparedStatement.setInt(2, student.getAge());
         preparedStatement.setInt(3, student.getId());
         int result = preparedStatement.executeUpdate();
-        databaseService.close(preparedStatement, connection);
         return result;
     }
-
 }
